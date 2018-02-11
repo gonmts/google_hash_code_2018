@@ -6,6 +6,7 @@ Created on Sun Feb 11 14:54:41 2018
 @author: RitaRamos
 """
 
+import var_despatcher
 
 def PBConstraintLEQ(my_vars,weights, k):
     s_ij={} 
@@ -14,7 +15,7 @@ def PBConstraintLEQ(my_vars,weights, k):
     
     for i in range(vars_size):
         for j in range (1, k + 1):
-            s_ij[(i,j)]= genAux() #GONCALLOOOO
+            s_ij[(i,j)]= var_despatcher.gen_aux() #GONCALLOOOO
         
     auxVars=[]
     auxWeights=[]
