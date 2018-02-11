@@ -25,8 +25,8 @@ def PBConstraintLEQ(my_vars,weights, k, SATSolver):
         if weights[i]>k:
             SATSolver.add_clause([-my_vars[i]])
         else:
-            auxVars+=my_vars[i]
-            auxWeights+=weights[i]
+            auxVars+=[my_vars[i]]
+            auxWeights+=[weights[i]]
     my_vars=auxVars
     weights=auxWeights
 

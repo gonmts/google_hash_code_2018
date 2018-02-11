@@ -13,24 +13,26 @@ import pseudo_boolean
 
 class Main:
     def __init__(self):
+        pass
 
-    def constraint_minL():
+    def constraint_minL(self):
         cnf_tomato=[]
         cnf_mushroom=[]
-        for i in range(self.par_slice):
+        for s in range(self.par_slice):
             for i in range(self.rows):
                 for j in range(self.col):
                     if(self.pizza[i,j]=="T"):
-                        cnf_tomato+=self.var_dispatcher.pizza_to_cnf(i,j,par_slice)
+                        cnf_tomato+=[self.var_dispatcher.pizza_to_cnf(i,j,s)]
                     else:
-                        cnf_mushroom+=self.var_dispatcher.pizza_to_cnf(i,j,par_slice)
+                        cnf_mushroom+=[self.var_dispatcher.pizza_to_cnf(i,j,par_s)]
 
-        #cnf_tomato.append()
+        cnf_h=cnf_tomato.append(cnf_mushroom)
+        s_ij_H=pseudo_boolean.PBConstraintLEQ(cnf_h, [1] * len(cnf_h), self.h , self.solver)
 
         s_ij_tomato=pseudo_boolean.PBConstraintGEQ(cnf_tomato, [1] * len(cnf_tomato), self.l , self.solver)
-        s_ij_mushroom=pseudo_boolean.PBConstraintGEQ(cnf_tomato, [1] * len(cnf_tomato),  self.l, self.solver)
+        s_ij_mushroom=pseudo_boolean.PBConstraintGEQ(cnf_mushroom, [1] * len(cnf_mushroom),  self.l, self.solver)
 
-    def contraint_maxCell():
+    def contraint_maxCell(self):
         var = []
         for i in range(self.rows):
             for j in range(self.col):
