@@ -1,20 +1,21 @@
 import numpy as np
 
-def read_pizza_file(filename):
-    with open(fname) as f:
-        content = f.readlines()
-        first_line = content[0].split(" ")
-        rows = int(first_line[0])
-        col = int(first_line[1])
-        min_ingr = int(first_line[2])
-        max_cell = int(first_line[3])
+def read_pizza_file(fname):
+    file_content = open(fname, 'rb').read().decode('iso-8859-1')
+    content = file_content.splitlines()
+    
+    first_line = content[0].split(" ")
+    rows = int(first_line[0])
+    col = int(first_line[1])
+    min_ingr = int(first_line[2])
+    max_cell = int(first_line[3])
+    
+    del content[0]
+    res=[]
+    for line in content:
+        res+= line.split()
+    res= np.array(res)
+    
+    return rows, col, min_ingr, max_cell, res
 
-        res = []
-        for line in content[1,:]:
-            l = []
-            for letter in line:
-                l += [letter]
-            res += [l]
-        res = np.array(res)
 
-        return {"rows": rows, "col": col, "L": min_ingr, "H": max_cell, "pizza": res}
