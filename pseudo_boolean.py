@@ -51,7 +51,7 @@ def PBConstraintLEQ(my_vars,weights, k, SATSolver):
     return s_ij
 
 
-def PBConstraintGEQ(my_vars, weights,  k):
+def PBConstraintGEQ(my_vars, weights,  k, SATSolver):
     newK = 0
 
     for i in range(len(weights)):
@@ -60,4 +60,4 @@ def PBConstraintGEQ(my_vars, weights,  k):
 
     newK -= k
 
-    return PBConstraintLEQ(my_vars, weights, newK)
+    return PBConstraintLEQ(my_vars, weights, newK, SATSolver)
