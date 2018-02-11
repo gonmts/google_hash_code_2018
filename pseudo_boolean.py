@@ -6,23 +6,24 @@ Created on Sun Feb 11 14:54:41 2018
 @author: RitaRamos :( e automatico, - diz ela
 """
 
-import var_despatcher
+import var_dispatcher
 
-def PBConstraintLEQ(my_vars,weights, k):
+
+def PBConstraintLEQ(my_vars,weights, k, SATSolver):
     s_ij={}
     literals =[]
     vars_size=len(my_vars)
 
     for i in range(vars_size):
         for j in range (1, k + 1):
-            s_ij[(i,j)]= var_despatcher.gen_aux() #GONCALLOOOO
+            s_ij[(i,j)]= var_dispatcher.gen_aux() #GONCALLOOOO
 
     auxVars=[]
     auxWeights=[]
 
     for i in range(my_vars):
         if weights[i]>k:
-            _SATSolver.add_clause([-my_vars[i]])
+            SATSolver.add_clause([-my_vars[i]])
         else:
             auxVars+=my_vars[i]
             auxWeights+=weights[i]
@@ -31,22 +32,22 @@ def PBConstraintLEQ(my_vars,weights, k):
 
 
     for j in range(1, weights[0] +1):
-        _SATSolver.add_clause([-my_vars[0], s_ij[(0,j)] ])
+        SATSolver.add_clause([-my_vars[0], s_ij[(0,j)] ])
 
     for j in range(weights[0]+1, k +1):
-        _SATSolver.add_clause([-s_ij[(0,j)] ])
+        SATSolver.add_clause([-s_ij[(0,j)] ])
 
     for i in range(1, len(my_vars)):
         for j in range(1, weights[i]):
-            _SATSolver.add_clause( [-my_vars[i], s_ij[(i,j)] ])
+            SATSolver.add_clause( [-my_vars[i], s_ij[(i,j)] ])
 
     for j in range(1, k+1):
-        _SATSolver.add_clause( [ s_ij[(i-1,j)]    , s_ij[(i,j)] ])
+        SATSolver.add_clause( [ s_ij[(i-1,j)]    , s_ij[(i,j)] ])
 
     for j in range(1, k- weights[i]+ 1):
-        _SATSolver.add_clause( [ -my_vars[i], s_ij[(i-1,j)]    , s_ij[(i,j +weights[i])] ])
+        SATSolver.add_clause( [ -my_vars[i], s_ij[(i-1,j)]    , s_ij[(i,j +weights[i])] ])
 
-    _SATSolver.add_clause( [-my_vars[i], s_ij[(i-1, k+1-weights[i] )] ])
+    SATSolver.add_clause( [-my_vars[i], s_ij[(i-1, k+1-weights[i] )] ])
 
     return s_ij
 
