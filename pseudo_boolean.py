@@ -3,10 +3,11 @@
 """
 Created on Sun Feb 11 14:54:41 2018
 
-@author: RitaRamos
+@author: RitaRamos :( e automatico, - diz ela
 """
 
 import var_dispatcher
+
 
 def PBConstraintLEQ(my_vars,weights, k, SATSolver):
     s_ij={}
