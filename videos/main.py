@@ -84,29 +84,32 @@ class main:
 		        print("video", video)
 		        
 		        my_caches_with_videos=[]
-		        
+
+		        my_index = 0
 		        for my_cache in my_caches[1:]:
 		            
 		            print ("nmy chace", my_cache)
 		            
 		            if video in self.caches[my_cache]:
-		                
-		                my_caches_with_videos+=[my_cache]
+		                my_caches_with_videos+=[my_index]
+		            my_index += 1
 		                            
 		        print("my_caches_with_videos", my_caches_with_videos)
 		        
 		        
 		        if len(my_caches_with_videos)>0:		            
 		            lantecy_caches=np.array(self.endpoints_cache_latency[endpoint])[my_caches_with_videos]		            
-		            print("lantecy_caches", lantecy_caches)		            
 		            saved_per_endp+=(lantency_data_center-np.min(lantecy_caches))*req
 		            
 		            
 		        print("saved", saved_per_endp)
 		        avarage+=req
 		    endpoint+=1
+
+		output = (saved_per_endp/avarage)*1000
+		print("Score: ", output)
 		            
-		return (saved_per_endp/avarage)*1000
+		return output
 
 
 
