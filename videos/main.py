@@ -1,4 +1,5 @@
 from readFile import read_videos_file
+import numpy as np
 
 class main:
 
@@ -7,13 +8,16 @@ class main:
 
 
 
-	def pontuacao_endpoint_video(self, requests, latency):
+	def pontuacao_endpoint_video(self, requests, latency, size):
 		return requests*latency
+
+	def pontuacao_endpoint_video_tamanho(self, requests, latency, size):
+		return size
 
 
 
 	def main(self):
-		fname = 'datasets/kittens.in.txt'
+		fname = 'datasets/me_at_the_zoo.in'
 		self.load_input(fname)
 
 		#Main algorithm
@@ -24,7 +28,7 @@ class main:
 		for endpoint in range(self.nrEndpoints):
 			endpoint_lists[endpoint] = []
 			for video in self.videoRequests[endpoint]:
-				score = self.pontuacao_endpoint_video( video[1], self.endpoints[endpoint][0] )
+				score = self.pontuacao_endpoint_video_tamanho( video[1], self.endpoints[endpoint][0], self.videoSize[video[0]])
 				endpoint_lists[endpoint] += [(video, score)] # [ (video, score) ]
 				global_list += [(video[0], endpoint, score)]
 			endpoint_lists[endpoint] = sorted(endpoint_lists[endpoint], key=getkey, reverse=True)
@@ -53,6 +57,14 @@ class main:
 				if(self.has_capacity(epcache[0], video)):
 					self.insert_cache(epcache[0], video)
 					break
+
+		print(self.caches)
+		print()
+		print(np.sum(list(self.cacheCapacity.values())))
+
+
+
+
 
 	def has_capacity(self, cache, video):
 		return self.cacheCapacity[cache] >= self.videoSize[video]
