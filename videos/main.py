@@ -65,6 +65,51 @@ class main:
 
 
 
+	def score(self):
+		saved_per_endp=0
+		avarage=0
+		endpoint=0
+		for my_caches in self.endpoints_cache.values():
+		    
+		    print("ENDDDDDPOINT", endpoint)
+		    
+		    lantency_data_center=my_caches[0]
+		    print ("lantency data", lantency_data_center)
+		        
+		    for video_req in self.videoRequests[endpoint]:
+		        
+		        video=video_req[0]
+		        req=video_req[1]
+		        
+		        print("video", video)
+		        
+		        my_caches_with_videos=[]
+		        
+		        for my_cache in my_caches[1:]:
+		            
+		            print ("nmy chace", my_cache)
+		            
+		            if video in self.caches[my_cache]:
+		                
+		                my_caches_with_videos+=[my_cache]
+		                            
+		        print("my_caches_with_videos", my_caches_with_videos)
+		        
+		        
+		        if len(my_caches_with_videos)>0:		            
+		            lantecy_caches=np.array(self.endpoints_cache_latency[endpoint])[my_caches_with_videos]		            
+		            print("lantecy_caches", lantecy_caches)		            
+		            saved_per_endp+=(lantency_data_center-np.min(lantecy_caches))*req
+		            
+		            
+		        print("saved", saved_per_endp)
+		        avarage+=req
+		    endpoint+=1
+		            
+		return (saved_per_endp/avarage)*1000
+
+
+
 
 	def has_capacity(self, cache, video):
 		return self.cacheCapacity[cache] >= self.videoSize[video]
@@ -83,6 +128,18 @@ class main:
 		for cache in range(self.nrCaches):
 			self.caches[cache] = set()
 			self.cacheCapacity[cache] = self.cacheSize
+
+
+
+		self.endpoints_cache = {}
+		self.endpoints_cache_latency = {}
+		for endpoint in range(self.nrEndpoints):
+			self.endpoints_cache[endpoint] = []
+			self.endpoints_cache_latency[endpoint] = []
+			self.endpoints_cache[endpoint] += [self.endpoints[endpoint][0]]
+			for cache in self.endpoints[endpoint][1:]:
+				self.endpoints_cache[endpoint] += [cache[0]]
+				self.endpoints_cache_latency[endpoint] += [cache[1]]
 
 
 
