@@ -1,5 +1,7 @@
+from readFile import read_videos_file
+
 class main:
-	
+
 	def __init__(self):
 		pass
 
@@ -64,7 +66,7 @@ class main:
 		self.caches[cache].add(video)
 		self.cacheCapacity[cache] -= self.videoSize(video)
 
-		
+
 
 	def load_input(self, fname):
 		self.nrVideos, self.nrEndpoints, self.requests, self.nrCaches, self.cacheSize, self.videoSize, self.endpoints, self.videoRequests = read_videos_file(fname)
@@ -82,4 +84,3 @@ def getkey(tup):
 
 def getkey2(triple):
 	return triple[2]
-	
