@@ -13,7 +13,7 @@ class main:
 		return size
 
 	def main(self):
-		fname = 'datasets/me_at_the_zoo.in'
+		fname = 'datasets/kittens.in.txt'
 		self.load_input(fname)
 
 		#Main algorithm
@@ -64,39 +64,26 @@ class main:
 		avarage=0
 		endpoint=0
 		for my_caches in self.endpoints_cache.values():
-		    
-		    print("ENDDDDDPOINT", endpoint)
-		    
+
 		    lantency_data_center=my_caches[0]
-		    print ("lantency data", lantency_data_center)
 		        
 		    for video_req in self.videoRequests[endpoint]:
 		        
 		        video=video_req[0]
 		        req=video_req[1]
 		        
-		        print("video", video)
-		        
 		        my_caches_with_videos=[]
 
 		        my_index = 0
-		        for my_cache in my_caches[1:]:
-		            
-		            print ("nmy chace", my_cache)
-		            
+		        for my_cache in my_caches[1:]:		            
 		            if video in self.caches[my_cache]:
 		                my_caches_with_videos+=[my_index]
-		            my_index += 1
-		                            
-		        print("my_caches_with_videos", my_caches_with_videos)
-		        
+		            my_index += 1		        
 		        
 		        if len(my_caches_with_videos)>0:		            
 		            lantecy_caches=np.array(self.endpoints_cache_latency[endpoint])[my_caches_with_videos]		            
 		            saved_per_endp+=(lantency_data_center-np.min(lantecy_caches))*req
-		            
-		            
-		        print("saved", saved_per_endp)
+
 		        avarage+=req
 		    endpoint+=1
 
