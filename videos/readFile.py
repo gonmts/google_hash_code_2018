@@ -25,9 +25,7 @@ def read_videos_file(fname):
             res += [(int(line[0]), int(line[1]))]
         line_number += 1
         endpoints[i] = res
-
-    for i in range(number_endpoints):
-        videos_per_endpoint[i] = []
+        videos_per_endpoint[i] = []        
 
     for i in range(requests):
         line = content[line_number].split(" ")
