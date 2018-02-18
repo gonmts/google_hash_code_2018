@@ -1,4 +1,4 @@
-from readFile import read_videos_file
+from readFile import read_videos_file, write_file
 import numpy as np
 
 class main:
@@ -6,15 +6,11 @@ class main:
 	def __init__(self):
 		pass
 
-
-
 	def pontuacao_endpoint_video(self, requests, latency, size):
 		return requests*latency
 
 	def pontuacao_endpoint_video_tamanho(self, requests, latency, size):
 		return size
-
-
 
 	def main(self):
 		fname = 'datasets/me_at_the_zoo.in'
@@ -61,9 +57,7 @@ class main:
 		print(self.caches)
 		print()
 		print(np.sum(list(self.cacheCapacity.values())))
-
-
-
+		write_file(self.caches, "out.txt")
 
 
 	def has_capacity(self, cache, video):

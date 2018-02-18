@@ -25,7 +25,7 @@ def read_videos_file(fname):
             res += [(int(line[0]), int(line[1]))]
         line_number += 1
         endpoints[i] = res
-        videos_per_endpoint[i] = []        
+        videos_per_endpoint[i] = []
 
     for i in range(requests):
         line = content[line_number].split(" ")
@@ -34,3 +34,10 @@ def read_videos_file(fname):
         line_number += 1
 
     return videos, number_endpoints, requests, cache_number, size_cache, videos_size, endpoints, videos_per_endpoint
+
+def write_file(caches, fname):
+    with open(fname, 'w') as f:
+        f.write('{}\n'.format(len(caches.keys())))
+        for key in caches.keys():
+            f.write('%d ' % key)
+            f.write(' '.join([str(item) for item in list(caches[key])]) + '\n')
