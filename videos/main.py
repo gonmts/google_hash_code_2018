@@ -10,7 +10,10 @@ class main:
 		return requests*latency
 
 	def pontuacao_endpoint_video_tamanho(self, requests, latency, size):
-		return size
+		#return size
+		#return requests*latency / ( 0.5 * size)
+		alpha = 0.7
+		return alpha*(requests*latency) + (1 - alpha)*(1/size)
 
 	def main(self):
 
