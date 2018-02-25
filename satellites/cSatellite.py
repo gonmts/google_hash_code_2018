@@ -1,3 +1,5 @@
+from cImage import *
+
 class Satellite:
 	def __init__(self, lat, longi, velocity, limitx, limity):
 		self.lat = lat
@@ -27,7 +29,8 @@ class Satellite:
 
 		self.maxCameraMove = self.maxCameraMove + self.w
 
-
+	def track(self, cImage):
+		
 
 	def isInRange(self, imageLat, imageLongi, t):
 		
