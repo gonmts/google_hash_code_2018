@@ -19,7 +19,7 @@ def is_in_time(photo_turn, conditions):
 def list_photos_in_range(satellite, position, list_photos, time):
     photos_dict = {}
     for photo in list_photos:
-        if satellite.cenas(position, photo) and is_in_time(time, photo.time):
+        if satellite.isInWishfulRange(position, photo) and is_in_time(time, photo.time):
             if photo.pos not in photos_dict:
                 photos_dict[photo.pos] = [0]
             photos_dict[photo.pos][0] += photo.score
