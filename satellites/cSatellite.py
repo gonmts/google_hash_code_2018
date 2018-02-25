@@ -30,10 +30,8 @@ class Satellite:
 		self.maxCameraMove = self.maxCameraMove + self.w
 
 	def track(self, cImage):
-		
+		self.lat = cImage.pos[0]
+		self.longi = cImage.pos[1]
 
 	def isInRange(self, imageLat, imageLongi, t):
 		
-
-
-
