@@ -1,9 +1,10 @@
-class Satellite:
-	def __init__(self, lat, longi, velocity, limitx, limity):
+class cSatellite:
+	def __init__(self, lat, longi, velocity, w, d):
 		self.lat = lat
 		self.longi = longi
-		self.maxCameraMov = limitx
-		self.limitCameraFoV = limity
+		self.maxCameraMov = w
+		self.w = w
+		self.limitCameraFoV = d
 		self.velocity = velocity
 		self.deltax = 0
 		self.deltay = 0
@@ -29,8 +30,16 @@ class Satellite:
 
 
 
-	def isInRange(self, imageLat, imageLongi, t):
-		
+	def isInRange(self, image, t):
+		requiredX = self.lat - image.pos[0]
+		requiredY = self.longi - image.pos[1]
+
+		if(requiredX > self.maxCameraMove or requiredX < - self.maxCameraMove
+				or requiredY > self.maxCameraMove or requiredY < - self.maxCameraMove): 
+			return False
+
+
+
 
 
 
