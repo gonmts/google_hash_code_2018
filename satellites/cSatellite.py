@@ -30,4 +30,12 @@ class Satellite:
 		else:
 			print('Ooops! This should never happen! :s')
 
+		self.maxCameraMove = self.maxCameraMove + self.w
+
+
+
+	def isInRange(self, imageLat, imageLongi, t):
+		
+
+
 
