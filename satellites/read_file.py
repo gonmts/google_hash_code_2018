@@ -21,7 +21,7 @@ def read_file(fname):
         max_change = int(line[3])
         max_value = int(line[4])
 
-        sat_list += [cSatellite(lat, log, vel, max_change, max_value)]
+        sat_list += [cSatellite(i, lat, log, vel, max_change, max_value)]
         index += 1
 
     number_collection = int(content[index])
@@ -51,3 +51,16 @@ def read_file(fname):
         collection[index] = col
 
     return number_turns, sat_list, collection, photo_list
+
+def write_file(fname, collections):
+    lst_taken = []
+    for key in collections.keys():
+        lst = collections[key]
+        for photo in lst:
+            if photo.done:
+                lst_taken += [photo]
+
+    with open(fname, 'w') as f:
+        f.write('{}\n'.format(len(lst_taken)))
+        for photo in lst_taken:
+            f.write(str(photo.pos[0]) + " " + str(photo.pos[1]) + " " + str(photo.sat_done) + " " + str(photo.time_done) + "\n")
