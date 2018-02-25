@@ -7,3 +7,8 @@ class cImage:
 		self.done = False
 		self.time_done = -1
 		self.sat_done = -1
+
+	def instagram(self, time, satallite_id):
+		self.done = True
+		self.time_done = time
+		self.sat_done = satallite_id
