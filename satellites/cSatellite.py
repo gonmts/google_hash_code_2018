@@ -1,17 +1,12 @@
 class Satellite:
-	def __init__(self):
-		pass
-
-
-	def main(self, lat, longi, velocity, limitx, limity):
+	def __init__(self, lat, longi, velocity, limitx, limity):
 		self.lat = lat
 		self.longi = longi
-		self.limitx = limitx
-		self.limity = limity
+		self.maxCameraMov = limitx
+		self.limitCameraFoV = limity
 		self.velocity = velocity
 		self.deltax = 0
 		self.deltay = 0
-
 
 
 	def updatePosition(self, t):
