@@ -31,8 +31,8 @@ class cSatellite:
 		self.maxCameraMove = self.maxCameraMove + self.w
 
 	def track(self, cImage):
-		self.lat = cImage.pos[0]
-		self.longi = cImage.pos[1]
+		self.deltax = cImage.pos[0] - self.lat
+		self.deltay =  cImage.pos[1] - self.longi
 
 	def isInRange(self, image, t):
 		requiredX = self.lat - image.pos[0]
