@@ -1,6 +1,5 @@
 from cSatellite import cSatellite
 from cImage import cImage
-import numpy as np
 
 def read_file(fname):
     sat_list = []
