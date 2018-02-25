@@ -31,6 +31,7 @@ class cSatellite:
 		self.maxCameraMove = self.maxCameraMove + self.w
 
 	def track(self, cImage):
+		pass
 
 
 	def isInRange(self, image, t):
@@ -38,11 +39,5 @@ class cSatellite:
 		requiredY = self.longi - image.pos[1]
 
 		if(requiredX > self.maxCameraMove or requiredX < - self.maxCameraMove
-				or requiredY > self.maxCameraMove or requiredY < - self.maxCameraMove): 
+				or requiredY > self.maxCameraMove or requiredY < - self.maxCameraMove):
 			return False
-
-
-
-
-
-
