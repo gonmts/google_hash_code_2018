@@ -31,7 +31,7 @@ class cSatellite:
 
 		self.lat = (self.lat + 324000)%(2*324000) - 324000
 		self.longi = (self.longi + 648000)%(2*648000) - 648000
-		self.maxCameraMove = self.maxCameraMove + self.w
+		self.maxCameraMov = self.maxCameraMov + self.w
 
 
 
@@ -43,7 +43,7 @@ class cSatellite:
 
 
 
-	def isInRange(self, image, t):
+	def isInRange(self, image):
 		requiredX = self.lat - image.pos[0]
 		requiredY = self.longi - image.pos[1]
 
@@ -59,3 +59,11 @@ class cSatellite:
 			return False
 
 		return True
+
+
+	def isInFutureRange(self, satpos, image):
+		requiredX = satpos[0] - image.pos[0]
+		requiredY = satpos[1] - image.pos[1]
+		return (requiredX <= self.limitCameraFoV and requiredX >= - self.limitCameraFoV
+					and requiredY <= self.limitCameraFoV and requiredY >= - self.limitCameraFoV)
+
