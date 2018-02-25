@@ -1,7 +1,8 @@
 from cImage import *
 
 class cSatellite:
-	def __init__(self, lat, longi, velocity, w, d):
+	def __init__(self, id, lat, longi, velocity, w, d):
+		self.id = self.id
 		self.lat = lat
 		self.longi = longi
 		self.maxCameraMov = w
@@ -28,6 +29,8 @@ class cSatellite:
 		else:
 			print('Ooops! This should never happen! :s')
 
+		self.lat = (self.lat + 324000)%(2*324000) - 324000
+		self.longi = (self.longi + 648000)%(2*648000) - 648000
 		self.maxCameraMove = self.maxCameraMove + self.w
 
 
