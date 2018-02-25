@@ -41,6 +41,24 @@ class cSatellite:
 		self.deltay = self.longi - cImage.pos[1]
 
 
+	def initList(self, totalFrames):
+		i = 1
+		originalLat = self.lat
+		originalLongi = self.longi
+		originalVel = self.velocity
+		posList = []
+
+		while(i <= totalFrames):
+			self.updatePosition(i)
+			posList += [(self.lat, self.longi)]
+			i += 1
+
+		self.lat = originalLat
+		self.longi = originalLongi
+		self.velocity = originalVel
+		self.maxCameraMove = self.w
+
+		return posList
 
 
 	def isInRange(self, image, t):
