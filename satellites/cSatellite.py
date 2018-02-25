@@ -61,7 +61,7 @@ class cSatellite:
 		return True
 
 
-	def isInFutureRange(self, satpos, image):
+	def isInWishfulRange(self, satpos, image):
 		requiredX = satpos[0] - image.pos[0]
 		requiredY = satpos[1] - image.pos[1]
 		return (requiredX <= self.limitCameraFoV and requiredX >= - self.limitCameraFoV
