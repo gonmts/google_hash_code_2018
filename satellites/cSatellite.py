@@ -1,7 +1,8 @@
 from cImage import *
 
 class cSatellite:
-	def __init__(self, lat, longi, velocity, w, d):
+	def __init__(self, id, lat, longi, velocity, w, d):
+		self.id = self.id
 		self.lat = lat
 		self.longi = longi
 		self.maxCameraMov = w
@@ -28,16 +29,33 @@ class cSatellite:
 		else:
 			print('Ooops! This should never happen! :s')
 
+		self.lat = (self.lat + 324000)%(2*324000) - 324000
+		self.longi = (self.longi + 648000)%(2*648000) - 648000
 		self.maxCameraMove = self.maxCameraMove + self.w
+
+
+
 
 	def track(self, cImage):
 		self.deltax = self.lat - cImage.pos[0]
 		self.deltay = self.longi - cImage.pos[1]
 
+
+
+
 	def isInRange(self, image, t):
 		requiredX = self.lat - image.pos[0]
 		requiredY = self.longi - image.pos[1]
 
-		if(requiredX > self.maxCameraMove or requiredX < - self.maxCameraMove
-				or requiredY > self.maxCameraMove or requiredY < - self.maxCameraMove): 
+		if(requiredX > self.limitCameraFoV or requiredX < - self.limitCameraFoV
+				or requiredY > self.limitCameraFoV or requiredY < - self.limitCameraFoV): 
 			return False
+
+		deltaX = requiredX - self.deltax
+		deltaY = requiredY - self.deltay
+
+		if(deltaX > self.maxCameraMov or deltaX < - self.maxCameraMov
+				or deltaY > self.maxCameraMov or deltaY < - self.maxCameraMov): 
+			return False
+
+		return True
