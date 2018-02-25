@@ -1,4 +1,4 @@
-from cSatellite import Satellite
+from cSatellite import cSatellite
 from cImage import cImage
 import numpy as np
 
@@ -21,7 +21,7 @@ def read_file(fname):
         max_change = int(line[3])
         max_value = int(line[4])
 
-        sat_list += [Satellite(lat, log, vel, max_change, number_sat)]
+        sat_list += [cSatellite(lat, log, vel, max_change, max_value)]
         index += 1
 
     number_collection = int(content[index])
@@ -38,14 +38,14 @@ def read_file(fname):
 
         for loc in range(number_locs):
             l = content[index].split(" ")
-            list_loc += [int(l[0]), int(l[1])]
+            list_loc += [[int(l[0]), int(l[1])]]
             index += 1
         for t in range(number_times):
             start, end = content[index].split(" ")
-            list_time += [int(start), int(end)]
+            list_time += [[int(start), int(end)]]
             index += 1
         for image in list_loc:
-            image = [cImage(image, list_time, value / len(number_locs))]
+            image = [cImage(image, list_time, value / number_locs)]
             photo_list += image
             col += image
         collection[index] = col
