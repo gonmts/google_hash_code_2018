@@ -37,8 +37,8 @@ class cSatellite:
 
 
 	def track(self, cImage):
-		self.deltax = cImage.pos[0] - self.lat
-		self.deltay =  cImage.pos[1] - self.longi
+		self.deltax = self.lat - cImage.pos[0]
+		self.deltay = self.longi - cImage.pos[1]
 
 
 
