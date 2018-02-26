@@ -5,16 +5,17 @@ from calc_score import *
 from tqdm import tqdm
 
 def main():
-    filename_input = ""
+    filename_input = "datasets/forever_alone.in"
     number_turns, sat_list, collection, photo_list = read_file(filename_input)
 
     sat_dict = {}
     for i in range(len(sat_list)):
         my_id = sat_list[i].id
+        sat_dict[my_id] = []
         positions = sat_list[i].initList(number_turns)
-        for k in range(len(positions)):
+        for k in tqdm(range(len(positions))):
             pos = positions[k]
-            sat_dict[my_id] = list_photos_in_range(sat_list[i], pos, photo_list, k)
+            sat_dict[my_id] += [list_photos_in_range(sat_list[i], pos, photo_list, k)]
 
     for t in tqdm(range(number_turns)):
         for sat_id in sat_dict.keys():
@@ -30,4 +31,5 @@ def main():
                     break
             if index_of_pic_taken >= 0:
                 del photo_in_frame[index_of_pic_taken]
-            sat_dict[sat_id].updatePosition(t)
+            sat_list[sat_id].updatePosition(t)
+    write_file("output.txt", collection)

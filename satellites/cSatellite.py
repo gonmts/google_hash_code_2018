@@ -1,8 +1,8 @@
 from cImage import *
 
 class cSatellite:
-	def __init__(self, id, lat, longi, velocity, w, d):
-		self.id = self.id
+	def __init__(self, ids, lat, longi, velocity, w, d):
+		self.id = ids
 		self.lat = lat
 		self.longi = longi
 		self.maxCameraMov = w
@@ -17,7 +17,6 @@ class cSatellite:
 		if( self.lat + self.velocity >= -324000 and self.lat + self.velocity <= 324000):
 			self.lat = self.lat + self.velocity
 			self.longi = self.longi - 15
-			self.velocity = self.originalVelocity
 		elif( self.lat + self.velocity > 324000 ):
 			self.lat = 648000 - (self.lat + self.velocity)
 			self.longi = -648000 + (self.longi - 15)
@@ -66,14 +65,14 @@ class cSatellite:
 		requiredY = self.longi - image.pos[1]
 
 		if(requiredX > self.limitCameraFoV or requiredX < - self.limitCameraFoV
-				or requiredY > self.limitCameraFoV or requiredY < - self.limitCameraFoV): 
+				or requiredY > self.limitCameraFoV or requiredY < - self.limitCameraFoV):
 			return False
 
 		deltaX = requiredX - self.deltax
 		deltaY = requiredY - self.deltay
 
 		if(deltaX > self.maxCameraMov or deltaX < - self.maxCameraMov
-				or deltaY > self.maxCameraMov or deltaY < - self.maxCameraMov): 
+				or deltaY > self.maxCameraMov or deltaY < - self.maxCameraMov):
 			return False
 
 		return True
@@ -84,4 +83,3 @@ class cSatellite:
 		requiredY = satpos[1] - image.pos[1]
 		return (requiredX <= self.limitCameraFoV and requiredX >= - self.limitCameraFoV
 					and requiredY <= self.limitCameraFoV and requiredY >= - self.limitCameraFoV)
-

@@ -20,9 +20,10 @@ def list_photos_in_range(satellite, position, list_photos, time):
     photos_dict = {}
     for photo in list_photos:
         if satellite.isInWishfulRange(position, photo) and is_in_time(time, photo.time):
-            if photo.pos not in photos_dict:
-                photos_dict[photo.pos] = [0]
-            photos_dict[photo.pos][0] += photo.score
-            photos_dict[photo.pos] += [photo]
+            key = tuple(photo.pos)
+            if key not in photos_dict:
+                photos_dict[key] = [0]
+            photos_dict[key][0] += photo.score
+            photos_dict[key] += [photo]
 
     return sorted(photos_dict.values(), key=lambda x: x[0])
