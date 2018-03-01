@@ -1,3 +1,5 @@
+from read_file import *
+
 class cTrip:
 
 	def __init__(self, startPoint, endPoint, earliestStart, latestFinish):
@@ -6,6 +8,8 @@ class cTrip:
 		self.earliestStart = earliestStart
 		self.latestFinish = latestFinish
 
+	def getTravelTime(self):
+		return read_file.distance(self.endPoint, self.startPoint)
 
-	
-
+	def getLatestStart(self):
+		return self.latestFinish - getTravelTime
