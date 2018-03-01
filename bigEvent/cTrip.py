@@ -10,7 +10,7 @@ class cTrip:
 		self.latestFinish = latestFinish
 
 	def getTravelTime(self):
-		return 0 #distance(self.endPoint, self.startPoint)
+		return distance(self.startPoint, self.endPoint)
 
 	def getLatestStart(self):
 		return self.latestFinish - self.getTravelTime()
