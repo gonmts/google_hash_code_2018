@@ -8,27 +8,42 @@ class cCar:
         self.onRide = False #bool
         self.destination = False #tuple
         self.completed_trips = [] #list
+        self.lastUpdate = -1
+        self.remainingDistance = -1
 
-    def beginTrip(self, Trip):
+    def beginTrip(self, Trip, t):
         self.onRide = True
         self.destination = Trip.endPoint
         self.completed_trips += [Trip]
+        self.lastUpdate = t;
+        self.remainingDistance = distance(self.current_pos, self.destination)
 
     def endTrip(self):
         self.onRide = False
         self.destination = False
+        self.current_pos = self.destination
+        self.remainingDistance = 0
+
+    def update(self, t):
+    	self.remainingDistance -= t - self.lastUpdate
+    	self.lastUpdate = t
+    	if self.remainingDistance == 0:
+    		self.endTrip()
+
+
 
     def timeToEndTrip(self):
         return distance(self.current_pos, self.destination)
 
     def isValid(self,Trip,t):
         res=0
-        currPos=self.current_pos
+        #currPos=self.current_pos
         if self.onRide:
             res+= self.timeToEndTrip()
-            currPos=self.destination
+            #currPos=self.destination
 
-        res+=distance(currPos, Trip.startPoint)
+        self.update(t)
+        res+= self.remainingDistance  #distance(currPos, Trip.startPoint)
 
         return res+t <= Trip.getLatestStart()
 
@@ -36,12 +51,12 @@ class cCar:
 
     def score(self,Trip,t):
         res=0
-        currPos=self.current_pos
+        #currPos=self.current_pos
         if self.onRide:
             res+= self.timeToEndTrip()
-            currPos=self.destination
+            #currPos=self.destination
 
-        res+=distance(currPos, Trip.startPoint)
+        res += self.remainingDistance
 
         if ( res+ t)< Trip.earliestStart:
             res-=Trip.bonus
