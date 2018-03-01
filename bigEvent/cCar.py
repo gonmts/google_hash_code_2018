@@ -1,24 +1,23 @@
 from cTrip import *
 from read_file import *
 
+
 class cCar:
-	def __init__(self):
-		self.current_pos = (0,0) #tuple
-		self.onRide = False #bool
-		self.destination = False #tuple
-		self.completed_trips = [] #list
-
-	def beginTrip(self, cTrip):
-		onRide = True
-		self.destination = cTrip.endPoint
-		self.completed_trips += [cTrip]
-
-
-	def endTrip(self):
-		onRide = False
-		self.destination = False
-
-        
+    def __init__(self):
+        self.current_pos = (0,0) #tuple
+        self.onRide = False #bool
+        self.destination = False #tuple
+        self.completed_trips = [] #list
+    
+    def beginTrip(self, Trip):
+        self.onRide = True
+        self.destination = Trip.endPoint
+        self.completed_trips += [Trip]
+    
+    def endTrip(self):
+        self.onRide = False
+        self.destination = False
+    
     def timeToEndTrip(self):
         return distance(self.current_pos,self.destination)
         
