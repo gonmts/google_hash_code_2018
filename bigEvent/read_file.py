@@ -29,9 +29,17 @@ def read_ride_file(fname):
         endY = int(ride[3])
         early_start = int(ride[4])
         late_finish = int(ride[5])
-        ride_list += [cTrip((startX, startY), (endX, endY), early_start, late_finish)]
+        ride_list += [cTrip(i, (startX, startY), (endX, endY), early_start, late_finish)]
 
     for i in range(number_cars):
         car_list += [cCar()]
 
     return rows, columns, bonus, time, ride_list, car_list
+
+def write_file(fname, list_cars):
+    with open(fname, 'w') as f:
+        for car in list_cars:
+            f.write(len(car.completed_trips))
+            for trip in car.completed_trips:
+                f.write(" " + str(trip.id))
+            f.write("\n")
