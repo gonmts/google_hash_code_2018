@@ -6,8 +6,11 @@ class cCar:
 		self.onRide = False #bool
 		self.destination = False #tuple 
 
-	def beginTrip(cTrip):
-		onRide = true;
+	def beginTrip(self, cTrip):
+		onRide = True
+		self.destination = cTrip.endPoint
 
-	def endTrip():
-		onRide = false;
+
+	def endTrip(self):
+		onRide = False
+		self.destination = False
