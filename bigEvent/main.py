@@ -18,7 +18,11 @@ class main:
 			filename_input = "datasets/" +  in_files[f_index] + ".in"
 			filename_output = in_files[f_index] + ".out"
 			rows, columns, bonus, time, ride_list, car_list = read_ride_file(filename_input)
+
 			MAX_CAR_PROCESS = len(car_list)
+			if(f_index == 4):
+				MAX_CAR_PROCESS = min(100, len(car_list))
+			#sortedTrips = sorted(ride_list, key=cTrip.getLatestStart)
 			sortedTrips = sorted(ride_list, key=cTrip.getLatestStart)
 
 			trips_taken = []
@@ -37,7 +41,7 @@ class main:
 								selected_car = car_list[k]
 
 					if (selected_car is not None):
-						selected_car.beginTrip(trip)
+						selected_car.beginTrip(trip, t)
 						trips_taken += [i]
 
 				for i in range(1, len(trips_taken) + 1):
