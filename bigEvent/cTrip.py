@@ -1,4 +1,7 @@
-from read_file import *
+def distance(start, finish):
+    startX, startY = start
+    finishX, finishY = finish
+    return abs(finishX - startX) + abs(finishY - startY)
 
 class cTrip:
 

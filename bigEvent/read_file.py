@@ -39,7 +39,7 @@ def read_ride_file(fname):
 def write_file(fname, list_cars):
     with open(fname, 'w') as f:
         for car in list_cars:
-            f.write(len(car.completed_trips))
+            f.write(str(len(car.completed_trips)))
             for trip in car.completed_trips:
                 f.write(" " + str(trip.id))
             f.write("\n")
