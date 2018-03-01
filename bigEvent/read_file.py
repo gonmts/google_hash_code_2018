@@ -29,7 +29,7 @@ def read_ride_file(fname):
         endY = int(ride[3])
         early_start = int(ride[4])
         late_finish = int(ride[5])
-        ride_list += [cTrip(i, (startX, startY), (endX, endY), early_start, late_finish)]
+        ride_list += [cTrip(i, (startX, startY), (endX, endY), early_start, late_finish, bonus)]
 
     for i in range(number_cars):
         car_list += [cCar()]
