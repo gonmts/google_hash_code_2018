@@ -3,5 +3,5 @@ from random import randint
 
 def getRandomListIndex(list, maxEl):
 	lstLength = len(list)
-	index = randint(0, lstLength - maxEl - 1)
+	index = randint(0, lstLength - maxEl)
 	return index
