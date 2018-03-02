@@ -13,6 +13,9 @@ class cTrip:
 		self.latestFinish = latestFinish
 		self.bonus = bonus
 
+	def getEarliestStart(self):
+		return self.getTravelTime()
+
 	def getTravelTime(self):
 		return distance(self.startPoint, self.endPoint)
 

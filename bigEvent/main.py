@@ -20,10 +20,10 @@ class main:
 			rows, columns, bonus, time, ride_list, car_list = read_ride_file(filename_input)
 
 			MAX_CAR_PROCESS = len(car_list)
-			if(f_index == 4):
-				MAX_CAR_PROCESS = min(100, len(car_list))
+			#if(f_index == 4):
+			#	MAX_CAR_PROCESS = min(10000, len(car_list))
 			#sortedTrips = sorted(ride_list, key=cTrip.getLatestStart)
-			sortedTrips = sorted(ride_list, key=cTrip.getLatestStart)
+			sortedTrips = sorted(ride_list, key=cTrip.getEarliestStart)
 
 			trips_taken = []
 			for t in tqdm(range(time)):
